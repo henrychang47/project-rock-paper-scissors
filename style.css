@@ -1,0 +1,24 @@
+.ui{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:15px;
+  
+}
+
+.ui .scores{
+  font-size: 80px;
+}
+
+.ui .message{
+  font-size: 60px;
+  color: blue;
+
+}
+
+.ui button{
+  font-size: 40px;
+  
+}

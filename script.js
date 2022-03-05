@@ -43,13 +43,67 @@ function playRound(playerSelection, computerSelection) {
   return 'wrong input';
 }
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    const playerInput = prompt(`Please input 'Paper', 'Scissors' or 'Rock'`);
+function setScore(target, score) {
+  if (target === 'player') {
+    playerScore = score;
+    playerScoreBox.textContent = playerScore;
+  }
 
-    console.log(playRound(playerInput, computerPlay()));
+  if (target === 'computer') {
+    computerScore = score;
+    computerScoreBox.textContent = computerScore;
   }
 }
 
-game();
+function checkMsg(msg) {
+  if (msg.includes('You Win')) {
+    setScore('player', ++playerScore);
+  }
 
+  if (msg.includes('You Lose')) {
+    setScore('computer', ++computerScore);
+  }
+
+  if (playerScore == 5) {
+    alert('You Win!!');
+    setScore('player', 0);
+    setScore('computer', 0);
+    messageBox.textContent = '---';
+  }
+
+  if (computerScore == 5) {
+    alert('Computer Win!!');
+    setScore('player', 0);
+    setScore('computer', 0);
+    messageBox.textContent = '---';
+  }
+}
+
+
+const playerScoreBox = document.querySelector('#playerScore');
+const computerScoreBox = document.querySelector('#computerScore');
+const messageBox = document.querySelector('.message');
+
+let playerScore = 0;
+let computerScore = 0;
+
+document.querySelector('#btnRock').addEventListener('click', () => {
+  const msg = playRound('Rock', computerPlay());
+  messageBox.textContent = msg;
+
+  checkMsg(msg);
+});
+
+document.querySelector('#btnPaper').addEventListener('click', () => {
+  const msg = playRound('Paper', computerPlay());
+  messageBox.textContent = msg;
+
+  checkMsg(msg);
+});
+
+document.querySelector('#btnScissors').addEventListener('click', () => {
+  const msg = playRound('Scissors', computerPlay());
+  messageBox.textContent = msg;
+
+  checkMsg(msg);
+});
